@@ -3,8 +3,10 @@ name: Check for Swear Words
 on:
   push:
     branches: [ main ]
+    paths-ignore: ['.github/workflows/check-for-swear-words.yml']
   pull_request:
     branches: [ main ]
+  
 
 jobs:
   check-swear-words:
