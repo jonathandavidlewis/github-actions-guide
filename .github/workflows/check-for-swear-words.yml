@@ -1,0 +1,31 @@
+name: Check for Swear Words
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-swear-words:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Search for swear words
+        run: |
+          # List of swear words (add more as needed)
+          SWEAR_WORDS=(shit fuck damn bitch ass cunt piss dick)
+          FOUND=0
+          for WORD in "${SWEAR_WORDS[@]}"; do
+            if git grep -i -n --word-regexp "$WORD"; then
+              echo "Swear word found: $WORD"
+              FOUND=1
+            fi
+          done
+          if [ $FOUND -eq 1 ]; then
+            echo "::error::Swear words found in the codebase."
+            exit 1
+          else
+            echo "No swear words found."
+          fi
