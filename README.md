@@ -1,4 +1,5 @@
-# github-actions-guide
+# Github Actions Guide
+
 A guide for creating readable, maintainable, secure, efficient github actions
 
 ## Principles
